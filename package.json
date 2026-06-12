@@ -1,0 +1,8 @@
+{
+  "name": "agenda-academica",
+  "version": "1.0.0",
+  "description": "Frontend do trabalho final de Desenvolvimento Web",
+  "scripts": {
+    "dev": "node dev-server.js"
+  }
+}

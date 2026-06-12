@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda Acadêmica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">CRUD Web • UFC Russas</p>
+      <h1>Agenda Acadêmica</h1>
+      <p class="subtitle">Cadastre, acompanhe e organize eventos, palestras, oficinas e atividades do campus.</p>
+    </div>
+    <button class="theme-toggle" type="button" id="themeToggle" aria-label="Alternar tema">
+      <span id="themeIcon">🌙</span>
+    </button>
+  </header>
+
+  <main class="layout">
+    <section class="panel form-panel" aria-labelledby="formTitle">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Cadastro</p>
+          <h2 id="formTitle">Novo evento</h2>
+        </div>
+        <span class="status-pill" id="apiStatus">Modo local</span>
+      </div>
+
+      <form id="eventForm">
+        <input type="hidden" id="eventId">
+
+        <label for="title">Título do evento</label>
+        <input id="title" name="title" type="text" placeholder="Ex.: Oficina de Node.js" required>
+
+        <div class="form-grid">
+          <div>
+            <label for="date">Data</label>
+            <input id="date" name="date" type="date" required>
+          </div>
+          <div>
+            <label for="time">Horário</label>
+            <input id="time" name="time" type="time" required>
+          </div>
+        </div>
+
+        <label for="place">Local</label>
+        <input id="place" name="place" type="text" placeholder="Ex.: Laboratório 03" required>
+
+        <div class="form-grid">
+          <div>
+            <label for="category">Categoria</label>
+            <select id="category" name="category" required>
+              <option value="">Selecione</option>
+              <option value="Palestra">Palestra</option>
+              <option value="Oficina">Oficina</option>
+              <option value="Curso">Curso</option>
+              <option value="Reunião">Reunião</option>
+              <option value="Seminário">Seminário</option>
+            </select>
+          </div>
+          <div>
+            <label for="seats">Vagas</label>
+            <input id="seats" name="seats" type="number" min="1" placeholder="40" required>
+          </div>
+        </div>
+
+        <label for="description">Descrição</label>
+        <textarea id="description" name="description" rows="4" placeholder="Descreva o objetivo do evento" required></textarea>
+
+        <div class="actions">
+          <button class="primary-btn" type="submit" id="submitBtn">Cadastrar evento</button>
+          <button class="secondary-btn" type="button" id="cancelBtn" hidden>Cancelar edição</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="content">
+      <div class="stats">
+        <article>
+          <span id="totalEvents">0</span>
+          <p>eventos</p>
+        </article>
+        <article>
+          <span id="totalSeats">0</span>
+          <p>vagas</p>
+        </article>
+        <article>
+          <span id="nextEvent">--</span>
+          <p>próximo</p>
+        </article>
+      </div>
+
+      <section class="panel list-panel" aria-labelledby="listTitle">
+        <div class="section-title list-heading">
+          <div>
+            <p class="eyebrow">Listagem</p>
+            <h2 id="listTitle">Eventos cadastrados</h2>
+          </div>
+          <div class="filters">
+            <input id="searchInput" type="search" placeholder="Pesquisar">
+            <select id="categoryFilter" aria-label="Filtrar por categoria">
+              <option value="">Todas</option>
+              <option value="Palestra">Palestra</option>
+              <option value="Oficina">Oficina</option>
+              <option value="Curso">Curso</option>
+              <option value="Reunião">Reunião</option>
+              <option value="Seminário">Seminário</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Evento</th>
+                <th>Data</th>
+                <th>Categoria</th>
+                <th>Vagas</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="eventsTable"></tbody>
+          </table>
+          <div class="empty-state" id="emptyState" hidden>
+            <strong>Nenhum evento encontrado</strong>
+            <p>Cadastre um evento ou ajuste os filtros para visualizar a listagem.</p>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
